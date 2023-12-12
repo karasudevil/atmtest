@@ -2,21 +2,26 @@ package com.sim.controller;
 
 import com.sim.model.Account;
 import com.sim.service.LoginService;
+import com.sim.service.LoginServiceImp;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
 public class AtmLoginController {
     private final Logger logger = LoggerFactory.getLogger(AtmLoginController.class);
-    private LoginService loginService;
+    @Autowired
+    private LoginServiceImp loginService;
     @GetMapping("/login")
-    public ResponseEntity<String> login(String name, String password){
+    public ResponseEntity<String> login(@RequestParam("name") String name,@RequestParam("password") String password){
+        logger.info("Received name:"+name+" password"+password);
         if(!loginService.isAccountValid(name)){
             logger.error("Got Invalid Account");
             return ResponseEntity.badRequest().body("Invalid Account name!");

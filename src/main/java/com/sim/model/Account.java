@@ -1,27 +1,31 @@
 package com.sim.model;
 
-import java.util.List;
 
 public class Account {
-    private String AccountId;
-    private final String name;
-    private final String password;
-    private int cashAmount;
-    public  Account(String name, String password){
+    private String accountid;
+    private String name;
+    private String password;
+    private int cashamount;
+    public  Account(String name, String password, String accountid, int cashamount){
         this.name=name;
         this.password=password;
+        this.accountid = accountid;
+        this.cashamount = cashamount;
+    }
+    public Account(){}
+
+    public void setAccountid(String accountid) {
+        this.accountid = accountid;
     }
 
-    public void setAccountId(String accountId) {
-        AccountId = accountId;
+    public void setCashamount(int cashamount) {
+        this.cashamount = cashamount;
     }
+    public void setName(String name) {this.name=name;}
+    public void setPassword(String password) {this.password=password;}
 
-    public void setCashAmount(int cashAmount) {
-        this.cashAmount = cashAmount;
-    }
-
-    public String getAccountId() {
-        return AccountId;
+    public String getAccountid() {
+        return accountid;
     }
 
     public String getName() {
@@ -32,17 +36,17 @@ public class Account {
         return password;
     }
 
-    public int getCashAmount() {
-        return cashAmount;
+    public int getCashamount() {
+        return cashamount;
     }
 
     @Override
     public String toString(){
         return "Account={" +
-                "AccountID=" + this.AccountId +
-                "name=" + this.name +
-                "password=" + this.password +
-                "cashAmount=" + this.cashAmount +
+                "AccountID=" + this.accountid +
+                ",name=" + this.name +
+                ",password=" + this.password +
+                ",cashAmount=" + this.cashamount +
                 "}";
     }
 
