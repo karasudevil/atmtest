@@ -20,10 +20,4 @@ public class LoginDAO {
         return  jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Account>(Account.class));
     }
 
-    public int update(Account account, int amount){
-        String sql = "update account set cashAmount=? where ACCOUNTID=?";
-        return jdbcTemplate.update(sql, amount, account.getAccountid());
-    }
-
-
 }

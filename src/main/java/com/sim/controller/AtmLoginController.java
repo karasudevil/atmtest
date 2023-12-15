@@ -3,6 +3,7 @@ package com.sim.controller;
 import com.sim.model.Account;
 import com.sim.service.LoginService;
 import com.sim.service.LoginServiceImp;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class AtmLoginController {
     @Autowired
     private LoginServiceImp loginService;
     @GetMapping("/login")
-    public ResponseEntity<String> login(@RequestParam("name") String name,@RequestParam("password") String password){
+    public ResponseEntity<String> login(@RequestParam("name") String name, @RequestParam("password") String password, HttpSession session){
         logger.info("Received name:"+name+" password"+password);
         if(!loginService.isAccountValid(name)){
             logger.error("Got Invalid Account");
@@ -32,6 +33,8 @@ public class AtmLoginController {
             return ResponseEntity.badRequest().body("Account not exist");
         }
         logger.info("Response "+account.toString());
+        session.setAttribute("uid", account.getAccountid());
+        session.setAttribute("name", account.getName());
         return ResponseEntity.status(HttpStatus.OK).body(account.toString());
     }
 
