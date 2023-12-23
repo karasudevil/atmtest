@@ -37,5 +37,20 @@ public class AtmLoginController {
         session.setAttribute("name", account.getName());
         return ResponseEntity.status(HttpStatus.OK).body(account.toString());
     }
+    @GetMapping("/logout")
+    public ResponseEntity<String> logout(HttpSession session){
+        logger.info("Received logout request");
+        session.removeAttribute("uid");
+        session.removeAttribute("name");
+        return ResponseEntity.status(HttpStatus.OK).body("account logout");
+    }
+    @GetMapping("/password")
+    public ResponseEntity<String> passwordChange(@RequestParam("new_password") String  password,HttpSession session){
+        logger.info("Received password change request");
+        String accountID= session.getAttribute("uid").toString();
+        if(loginService.ChangePasswordService(accountID,password))
+            return ResponseEntity.status(HttpStatus.OK).body("change password succeed");
+        return ResponseEntity.badRequest().body("password change failed");
+    }
 
 }

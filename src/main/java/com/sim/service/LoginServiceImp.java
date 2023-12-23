@@ -40,4 +40,9 @@ public class LoginServiceImp implements LoginService{
         }
 
     }
+    public boolean ChangePasswordService(String accountID,String password){
+        if(loginDAO.UpdatePassword(password,accountID)>0)
+            return true;
+        return false;
+    }
 }

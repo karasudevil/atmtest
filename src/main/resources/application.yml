@@ -4,8 +4,6 @@ spring:
       mode: always
       platform: h2
       encoding: utf-8
-      schema-locations: classpath*:db/schema.sql
-      data-locations: classpath*:db/account.sql
       separator: ";"
       username: sa
       password: 123456

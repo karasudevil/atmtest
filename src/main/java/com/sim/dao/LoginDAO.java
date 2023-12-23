@@ -19,5 +19,9 @@ public class LoginDAO {
         String sql = "select * from account where name="+name;
         return  jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Account>(Account.class));
     }
+    public int UpdatePassword(String newPassword,String id){
+        String sql = "update account set password=? where accountid=?";
+        return jdbcTemplate.update(sql,newPassword,id);
+    }
 
 }

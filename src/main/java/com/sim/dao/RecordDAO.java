@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class RecordDAO {
     @Autowired
@@ -22,6 +24,12 @@ public class RecordDAO {
     public int UpdateCount(String accountID){
         String sql = "update account_record set recordcount=recordcount+1 where accountid="+ accountID;
         return jdbcTemplate.update(sql);
+    }
+    public List<Record> GetRecord(String accountID){
+        List<Record> records;
+        String sql="select * from record where accountid="+ accountID;
+        records= jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Record.class));
+        return records;
     }
 
 }
