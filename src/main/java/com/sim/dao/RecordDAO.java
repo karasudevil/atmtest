@@ -14,9 +14,15 @@ public class RecordDAO {
     @Autowired
     JdbcTemplate jdbcTemplate;
     public int insertRecord(Record record, String id){
-        String sql="insert into record values(?,?,?,?)";
-        return jdbcTemplate.update(sql,id ,record.getRecordType(),Integer.parseInt(record.getRecordID()) , record.getRecordBody());
+        String sql="insert into record values(?,?,?,?,?,?,?)";
+        return jdbcTemplate.update(sql,id ,record.getRecordType(),Integer.parseInt(record.getRecordID()) , record.getData(),record.getAmount(),record.getRemain(),record.getDestination());
     }
+    public int GetRecordCount(){
+        String sql = "select count(*) from record";
+        int count = jdbcTemplate.queryForObject(sql,Integer.class);
+        return count;
+    }
+
     public AccountCount GetCount(String accountID){
         String sql= "select * from account_record where accountid=" + accountID;
         return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(AccountCount.class));

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +33,7 @@ public class AtmDepositController {
         account=controllerUtils.getAccountFromID(controllerUtils.getUidFromHttpSession(session).toString());
         if(dispenseService.dispenseCash(account,amount)){
             logger.info("Deposit service start");
-            Record record= recordService.getRecord("deposit", account, amount, null);
+            Record record= recordService.getRecord("deposit", account, amount, "");
             logger.info("add record "+ record.toString());
             return ResponseEntity.status(HttpStatus.OK).body("Deposit succeed");
         }

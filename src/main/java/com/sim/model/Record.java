@@ -4,7 +4,15 @@ public class Record {
     private String accountID;
     private String recordID;
     private String recordType;
-    private String recordBody;
+
+    private String data;
+
+    private String amount;
+
+    private String remain;
+
+    private String destination;
+
 
     public void setAccountID(String accountID) {
         this.accountID = accountID;
@@ -18,8 +26,34 @@ public class Record {
         this.recordType = recordType;
     }
 
-    public void setRecordBody(String recordBody) {
-        this.recordBody = recordBody;
+    public void setData(String data){this.data=data; }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public void setRemain(String remain) {
+        this.remain = remain;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public String getRemain() {
+        return remain;
     }
 
     public String getRecordID() {
@@ -30,20 +64,21 @@ public class Record {
         return accountID;
     }
 
-    public String getRecordBody() {
-        return recordBody;
-    }
+
 
     public String getRecordType() {
         return recordType;
     }
     @Override
     public String toString(){
-        return "Record={" +
-                "accountID=" + accountID +
-                ",recordID=" + recordID +
-                ",recordType=" + recordType +
-                ",recordBody=" + recordBody +
-                "}";
+        return "Record: {" +
+                " accountID=" + accountID +
+                " recordID=" + recordID +
+                " recordType=" + recordType +
+                " data="  +data +
+                " amount=" +amount +
+                " remain=" +remain +
+                " destination=" +destination +
+                " }";
     }
 }

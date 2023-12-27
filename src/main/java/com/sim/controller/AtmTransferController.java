@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AtmTransferController {
     @Autowired
     private TransferService transferService;
+    @Autowired
     private ControllerUtils controllerUtils;
+    @Autowired
     private LoginDAO loginDAO;
+    @Autowired
     private RecordService recordService;
     private final Logger logger= LoggerFactory.getLogger(AtmTransferController.class);
     @GetMapping("/transfer")
@@ -40,8 +44,11 @@ public class AtmTransferController {
         if(transferService.TransferCash(account,destination,amount)){
             logger.info("Transfer succeed");
             Record record;
-            record=recordService.getRecord("transfer",account,amount,destination);
+            record=recordService.getRecord("transfer",account,-amount,destination.getName());
+            Record record1;
+            record1=recordService.getRecord("transfer", destination, amount, account.getName());
             logger.info("generate record "+record.toString());
+            logger.info("generate destination record"+record1.toString());
             return  ResponseEntity.status(HttpStatus.OK).body("Transfer succeed");
         }
         else{

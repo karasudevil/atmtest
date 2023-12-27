@@ -42,12 +42,12 @@ public class Account {
 
     @Override
     public String toString(){
-        return "Account={" +
-                "AccountID=" + this.accountid +
-                ",name=" + this.name +
-                ",password=" + this.password +
-                ",cashAmount=" + this.cashamount +
-                "}";
+        return "Account: {" +
+                " AccountID=" + this.accountid +
+                " name=" + this.name +
+                " password=" + this.password +
+                " cashAmount=" + this.cashamount +
+                " }";
     }
 
 }

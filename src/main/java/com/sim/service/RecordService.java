@@ -14,14 +14,17 @@ public class RecordService {
     private RecordDAO recordDAO;
     @Autowired
     private RecordUtils recordUtils;
-    public Record getRecord(String recordType, Account account, int amount, Account destination){
-        String body=recordUtils.RecordWrapper(recordType,account,Integer.valueOf(amount).toString(),destination);
+    public Record getRecord(String recordType, Account account, int amount, String  destination){
+        String body=recordUtils.RecordWrapper(recordType,account,Integer.valueOf(amount).toString());
         Record record=new Record();
-        record.setRecordBody(body);
+        record.setAmount(Integer.valueOf(amount).toString());
+        record.setData(body);
+        record.setDestination(destination);
+        record.setRemain(Integer.valueOf(account.getCashamount()).toString());
         record.setRecordType(recordType);
         record.setAccountID(account.getAccountid());
         AccountCount accountCount=recordDAO.GetCount(account.getAccountid());
-        record.setRecordID(Integer.valueOf(accountCount.getRecordCount()+1).toString());
+        record.setRecordID(Integer.valueOf(recordDAO.GetRecordCount()+1).toString());
         recordDAO.UpdateCount(account.getAccountid());
         recordDAO.insertRecord(record, account.getAccountid());
         return record;

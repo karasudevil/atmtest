@@ -9,7 +9,10 @@ create table record(
     accountid varchar(50) not null  ,
     recordtype varchar(50) not null ,
     recordid integer not null ,
-    recordbody varchar(100),
+    data varchar(100),
+    amount varchar(100),
+    remain varchar(100),
+    destination varchar(100),
     primary key (recordid)
 );
 create table account_record(
